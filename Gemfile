@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.1.9'
-#gem 'rails', '~> 4.2.7'
+#gem 'rails', '~> 4.1.9'
+gem 'rails', '~> 4.2'
 
 gem 'mysql2', '~> 0.3.18'
 gem 'protected_attributes'
@@ -65,7 +65,7 @@ gem 'rest-client'
 gem 'nokogiri'
 
 # Inherited Resources
-gem 'inherited_resources'
+#gem 'inherited_resources'
 
 # Pagination
 gem 'kaminari'
