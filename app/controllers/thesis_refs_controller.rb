@@ -28,7 +28,7 @@ class ThesisRefsController < ApplicationController
         @thesis_ref.save!
         @tcc.references.create!(:element => @thesis_ref)
         flash[:success] = t(:successfully_saved)
-        redirect_to bibliographies_path(:anchor => 'thesis', :moodle_user => params[:moodle_user])
+        redirect_to bibliographies_path(:moodle_user => params[:moodle_user])
       end
     else
       flash[:error] = t(:please_fix_invalid_data)
@@ -37,13 +37,14 @@ class ThesisRefsController < ApplicationController
   end
 
   def update
-    update! do |success, failure|
-      failure.html do
-        flash[:error] = t(:please_fix_invalid_data)
-        render :edit
-      end
-      success.html { redirect_to bibliographies_path(:anchor => 'thesis', :moodle_user => params[:moodle_user]),
-                                 flash: {:success => t(:successfully_saved)} }
+    @thesis_ref =  @tcc.thesis_refs.find(params[:id])
+
+    if @thesis_ref.valid? && @thesis_ref.update_attributes(params[:thesis_ref])
+      flash[:success] = t(:successfully_saved)
+      redirect_to bibliographies_path(:moodle_user => params[:moodle_user])
+    else
+      flash[:error] = t(:please_fix_invalid_data)
+      render :edit
     end
   end
 
@@ -54,7 +55,7 @@ class ThesisRefsController < ApplicationController
     else
       flash[:error] = @thesis_ref.errors.full_messages.to_sentence
     end
-    redirect_to bibliographies_path(:anchor => 'thesis', :moodle_user => params[:moodle_user])
+    redirect_to bibliographies_path(:moodle_user => params[:moodle_user])
   end
 
   private

@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 #gem 'rails', '~> 4.1.9'
 gem 'rails', '~> 4.2'
+#gem 'rails', '~> 5.0'
 
 gem 'mysql2', '~> 0.3.18'
 gem 'protected_attributes'
@@ -126,7 +127,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
-  gem 'quiet_assets'
+  # gem 'quiet_assets'
 
   # previne N+1 queries
   gem 'bullet'
@@ -143,7 +144,7 @@ group :test do
   # Request tests
   gem 'capybara'
   gem 'capybara-puma'
-  gem 'rack_session_access'
+  #gem 'rack_session_access'
   gem 'poltergeist'
   gem 'json_spec'
   gem 'database_cleaner'

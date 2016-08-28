@@ -32,17 +32,19 @@ class ArticleRefsController < ApplicationController
       end
     else
       flash[:error] = t(:please_fix_invalid_data)
-      render :new
+      render action: :new
     end
   end
 
   def update
-    update! do |success, failure|
-      failure.html do
-        flash[:error] = t(:please_fix_invalid_data)
-        render :edit
-      end
-      success.html { redirect_to bibliographies_path(:anchor => 'article', :moodle_user => params[:moodle_user]), flash: {:success => t(:successfully_saved)} }
+    @article_ref = @tcc.article_refs.find(params[:id])
+
+    if @article_ref.valid? && @article_ref.update_attributes(params[:article_ref])
+      flash[:success] = t(:successfully_saved)
+      redirect_to bibliographies_path(:moodle_user => params[:moodle_user])
+    else
+      flash[:error] = t(:please_fix_invalid_data)
+      render :edit
     end
   end
 
